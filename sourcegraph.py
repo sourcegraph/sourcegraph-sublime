@@ -1,19 +1,29 @@
 import sublime, sublime_plugin
 import webbrowser
 import os, subprocess
+import platform
 from urllib.parse import urlparse, urlencode
+
+# Define a startupinfo which can be passed to subprocess calls which hides the
+# command prompt on Windows. Otherwise doing simple things like e.g. running a
+# git command would create a visual Command Prompt window, annoying the user.
+startupinfo = None
+if platform.system() == 'Windows':
+    startupinfo = subprocess.STARTUPINFO()
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    startupinfo.wShowWindow = subprocess.SW_HIDE
 
 FILENAME_SETTINGS = 'Sourcegraph.sublime-settings'
 
 # gitRemotes returns the names of all git remotes, e.g. ['origin', 'foobar']
 def gitRemotes(repoDir):
-	proc = subprocess.Popen(['git', 'remote'], stdout=subprocess.PIPE, cwd=repoDir)
+	proc = subprocess.Popen(['git', 'remote'], stdout=subprocess.PIPE, cwd=repoDir, startupinfo=startupinfo)
 	return proc.stdout.read().decode('utf-8').splitlines()
 
 # gitRemoteURL returns the remote URL for the given remote name.
 # e.g. 'origin' -> 'git@github.com:foo/bar'
 def gitRemoteURL(repoDir, remoteName):
-	proc = subprocess.Popen(['git', 'remote', 'get-url', remoteName], stdout=subprocess.PIPE, cwd=repoDir)
+	proc = subprocess.Popen(['git', 'remote', 'get-url', remoteName], stdout=subprocess.PIPE, cwd=repoDir, startupinfo=startupinfo)
 	return proc.stdout.read().decode('utf-8').rstrip()
 
 # gitDefaultRemoteURL returns the remote URL of the first Git remote found. An
@@ -29,7 +39,7 @@ def gitDefaultRemoteURL(repoDir):
 # gitRootDir returns the repository root directory for any directory within the
 # repository.
 def gitRootDir(repoDir):
-	proc = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'], stdout=subprocess.PIPE, cwd=repoDir)
+	proc = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'], stdout=subprocess.PIPE, cwd=repoDir, startupinfo=startupinfo)
 	return proc.stdout.read().decode('utf-8').rstrip()
 
 # removePrefixes removes any of the given prefixes from the input string `s`.
