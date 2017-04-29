@@ -2,6 +2,7 @@
 
 ## Installation
 
+1. [Install Package Control](https://packagecontrol.io/installation), if you haven't already.
 1. Open the command palette `Cmd+Shift+P` (`Ctrl+Shift+P` on Windows/Linux).
 2. Search for `Package Control: Install Package` and press enter.
 3. Search for `Sourcegraph` and press enter to install the plugin.
