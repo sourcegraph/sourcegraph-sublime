@@ -18,3 +18,12 @@ Usage
   |---------------------------------|------------|-----------------|
   | Open file in Sourcegraph        | `Option+O` | `Alt+O`         |
   | Search selection in Sourcegraph | `Option+K` | `Alt+K`         |
+
+Version History
+===============
+
+  v1.0.1 - minor bug fixes
+    - Fixed a bug where `https` etc. GitHub repo remote URLs would incorrectly build the Sourcegraph.com URL.
+    - Windows: Fixed a bug where git commands would create Command Prompt pop-up windows.
+
+  v1.0.0 - Initial Release; basic Open File & Search functionality.

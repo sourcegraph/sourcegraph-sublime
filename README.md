@@ -44,3 +44,12 @@ To develop the plugin:
 - `git clone` the repository into `~/Library/Application Support/Sublime Text 3/Packages/sourcegraph-sublime`
 - Open the console with ``` `Ctrl+` ``` (ctrl+backtick)
 - Make changes to the Python code and watch as Sublime reloads.
+
+
+## Version History
+
+- v1.0.1 - minor bug fixes
+    - Fixed a bug where `https` etc. GitHub repo remote URLs would incorrectly build the Sourcegraph.com URL.
+    - Windows: Fixed a bug where git commands would create Command Prompt pop-up windows.
+
+- v1.0.0 - Initial Release; basic Open File & Search functionality.
