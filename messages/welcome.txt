@@ -1,0 +1,20 @@
+Sourcegraph for Sublime Text 3
+==============================
+
+  Thank you for installing Sourcegraph for Sublime Text 3!
+
+  Note: You can view the README any time via Preferences -> Package Settings -> Sourcegraph -> Read Me
+
+  Questions or Feedback? Please file an issue: https://github.com/sourcegraph/sourcegraph-sublime/issues/new
+
+Usage
+=====
+
+  In the command palette (`Cmd+Shift+P` or `Ctrl+Shift+P`), search for `Sourcegraph:` to see available actions.
+
+  Keyboard Shortcuts:
+
+  | Description                     | Mac        | Linux / Windows |
+  |---------------------------------|------------|-----------------|
+  | Open file in Sourcegraph        | `Option+O` | `Alt+O`         |
+  | Search selection in Sourcegraph | `Option+K` | `Alt+K`         |

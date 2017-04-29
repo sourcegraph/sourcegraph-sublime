@@ -1,0 +1,5 @@
+{
+	// The Sourcegraph instance to use. Specify your on-premises Sourcegraph
+	// instance here, if applicable.
+	"SOURCEGRAPH_URL": "https://sourcegraph.com",
+}

@@ -1,0 +1,10 @@
+[
+    {
+		"keys": ["option+o"],
+		"command": "sourcegraph_open"
+	},
+    {
+		"keys": ["option+k"],
+		"command": "sourcegraph_search"
+	}
+]

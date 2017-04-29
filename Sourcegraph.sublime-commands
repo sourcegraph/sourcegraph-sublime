@@ -1,0 +1,38 @@
+[
+	{
+		"caption": "Sourcegraph: Default Settings",
+		"command": "open_file",
+		"args": {
+			"file": "${packages}/sourcegraph/Sourcegraph.sublime-settings"
+		}
+	},
+	{
+		"caption": "Sourcegraph: User Settings",
+		"command": "open_file",
+		"args": {
+			"file": "${packages}/User/Sourcegraph.sublime-settings"
+		}
+	},
+	{
+		"caption": "Sourcegraph: Read Me",
+		"command": "open_file",
+		"args": {
+			"file": "${packages}/sourcegraph/README.md"
+		}
+	},
+	{
+		"caption": "Sourcegraph: License (MIT)",
+		"command": "open_file",
+		"args": {
+			"file": "${packages}/sourcegraph/LICENSE"
+		}
+	},
+	{
+		"caption": "Sourcegraph: Open",
+		"command": "sourcegraph_open"
+	},
+	{
+		"caption": "Sourcegraph: Search",
+		"command": "sourcegraph_search"
+	}
+]
