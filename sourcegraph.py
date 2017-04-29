@@ -54,6 +54,8 @@ def removePrefixes(s, prefixes):
 # `b`.
 def replaceLastOccurrence(s, a, b):
 	k = s.rfind(a)
+	if k == -1:
+		return s
 	return s[:k] + b + s[k+1:]
 
 # repoFromRemoteURL returns the repository name from the remote URL. An
