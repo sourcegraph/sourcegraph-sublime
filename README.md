@@ -44,7 +44,7 @@ To develop the plugin:
 - `git clone` the repository into `~/Library/Application Support/Sublime Text 3/Packages/sourcegraph-sublime`
 - Open the console with ``` `Ctrl+` ``` (ctrl+backtick)
 - Make changes to the Python code and watch as Sublime reloads.
-
+- To release a new version: update `messages.json`, `README.md`, and `messages/welcome.txt` and commit; then `git tag v0.0.0` and `git push --tags`.
 
 ## Version History
 
