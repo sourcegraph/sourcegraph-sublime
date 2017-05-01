@@ -42,6 +42,12 @@ def gitRootDir(repoDir):
 	proc = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'], stdout=subprocess.PIPE, cwd=repoDir, startupinfo=startupinfo)
 	return proc.stdout.read().decode('utf-8').rstrip()
 
+# gitBranch returns either the current branch name of the repository OR in all
+# other cases (e.g. detached HEAD state), it returns "HEAD".
+def gitBranch(repoDir):
+	proc = subprocess.Popen(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stdout=subprocess.PIPE, cwd=repoDir, startupinfo=startupinfo)
+	return proc.stdout.read().decode('utf-8').rstrip()
+
 # removePrefixes removes any of the given prefixes from the input string `s`.
 # Only one prefix is removed.
 def removePrefixes(s, prefixes):
@@ -90,12 +96,21 @@ def sourcegraphURL(settings):
 def lineHash(row, col, row2, col2):
 	return 'L' + str(row+1) + ':' + str(col+1) + '-' + str(row2+1) + ':' + str(col2+1)
 
+def branchStr(branch):
+	if branch == "HEAD":
+		return "" # Detatched head state
+	if branch == "master":
+		# Assume master is the default branch, for now.
+		return ""
+	return "@" + branch
+
 # repoInfo returns the Sourcegraph repository URI, and the file path relative
 # to the repository root. If the repository URI cannot be determined, an
 # exception is logged and (None, None) is returned.
 def repoInfo(fileName):
 	repo = None
 	fileRel = None
+	branch = None
 	try:
 		# Determine repository root directory.
 		fileDir = os.path.dirname(fileName)
@@ -104,13 +119,14 @@ def repoInfo(fileName):
 		# Determine file path, relative to repository root.
 		fileRel = fileName[len(repoRoot)+1:]
 		repo = repoFromRemoteURL(gitDefaultRemoteURL(repoRoot))
+		branch = gitBranch(repoRoot)
 	except Exception as e:
-		print(e)
-	return repo, fileRel
+		print("repoInfo:", e)
+	return repo, branch, fileRel
 
 class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		repo, fileRel = repoInfo(self.view.file_name())
+		repo, branch, fileRel = repoInfo(self.view.file_name())
 		if repo == None:
 			return
 
@@ -120,12 +136,12 @@ class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 
 		# Open in browser
 		settings = sublime.load_settings(FILENAME_SETTINGS)
-		url = sourcegraphURL(settings) + repo + '/-/blob/' + fileRel + '#' + lineHash(row, col, row2, col2)
+		url = sourcegraphURL(settings) + repo + branchStr(branch) + '/-/blob/' + fileRel + '#' + lineHash(row, col, row2, col2)
 		webbrowser.open(url, new=2)
 
 class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		repo, fileRel = repoInfo(self.view.file_name())
+		repo, branch, fileRel = repoInfo(self.view.file_name())
 		if repo == None:
 			# TODO(slimsag): Depending on global search UX, we may not need to
 			# call repoInfo at all / just direct the user to global search
