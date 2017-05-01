@@ -51,7 +51,7 @@ To develop the plugin:
   2. `README.md` (describe ALL changes)
   3. `messages/welcome.txt` (copy from README.md change above)
   4. `sourcegraph.py` (`VERSION` constant)
-  - Then `git commit -m "all: release v<THE VERSION>` and `git tag v<THE VERSION>` and `git push --tags`.
+  - Then `git commit -m "all: release v<THE VERSION>` and `git push` and `git tag v<THE VERSION>` and `git push --tags`.
   - Note: it sometimes takes a few hours for it to show up on https://packagecontrol.io/packages/Sourcegraph
 
 
