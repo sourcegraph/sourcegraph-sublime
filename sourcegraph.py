@@ -141,14 +141,6 @@ class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 
 class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		repo, branch, fileRel = repoInfo(self.view.file_name())
-		if repo == None:
-			# TODO(slimsag): Depending on global search UX, we may not need to
-			# call repoInfo at all / just direct the user to global search
-			# instead. We assume global search is "from within a repo file"
-			# here.
-			return
-
 		# For now, we assume the first selection is the most interesting one.
 		(row,col) = self.view.rowcol(self.view.sel()[0].begin())
 		(row2,col2) = self.view.rowcol(self.view.sel()[0].end())
@@ -158,5 +150,5 @@ class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 
 		# Search in browser
 		settings = sublime.load_settings(FILENAME_SETTINGS)
-		url = sourcegraphURL(settings) + repo + '/-/blob/' + fileRel + '?' + urlencode({'query': query}) + '#' + lineHash(row, col, row2, col2)
+		url = sourcegraphURL(settings) + "/search" + '?' + urlencode({'q': query})
 		webbrowser.open(url, new=2)
