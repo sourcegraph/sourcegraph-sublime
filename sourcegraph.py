@@ -13,6 +13,7 @@ if platform.system() == 'Windows':
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startupinfo.wShowWindow = subprocess.SW_HIDE
 
+VERSION = 'v1.0.3'
 FILENAME_SETTINGS = 'Sourcegraph.sublime-settings'
 
 # gitRemotes returns the names of all git remotes, e.g. ['origin', 'foobar']
@@ -97,12 +98,12 @@ def lineHash(row, col, row2, col2):
 	return 'L' + str(row+1) + ':' + str(col+1) + '-' + str(row2+1) + ':' + str(col2+1)
 
 def branchStr(branch):
-	if branch == "HEAD":
-		return "" # Detatched head state
-	if branch == "master":
+	if branch == 'HEAD':
+		return '' # Detatched head state
+	if branch == 'master':
 		# Assume master is the default branch, for now.
-		return ""
-	return "@" + branch
+		return ''
+	return '@' + branch
 
 # repoInfo returns the Sourcegraph repository URI, and the file path relative
 # to the repository root. If the repository URI cannot be determined, an
@@ -136,7 +137,7 @@ class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 
 		# Open in browser
 		settings = sublime.load_settings(FILENAME_SETTINGS)
-		url = sourcegraphURL(settings) + repo + branchStr(branch) + '/-/blob/' + fileRel + '#' + lineHash(row, col, row2, col2)
+		url = sourcegraphURL(settings) + repo + branchStr(branch) + '/-/blob/' + fileRel + '?' + urlencode({'utm_source': 'Sublime-' + VERSION}) + '#' + lineHash(row, col, row2, col2)
 		webbrowser.open(url, new=2)
 
 class SourcegraphSearchCommand(sublime_plugin.TextCommand):
@@ -145,10 +146,10 @@ class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 		(row,col) = self.view.rowcol(self.view.sel()[0].begin())
 		(row2,col2) = self.view.rowcol(self.view.sel()[0].end())
 		query = self.view.substr((self.view.sel())[0])
-		if query == "":
+		if query == '':
 			return # nothing to query
 
 		# Search in browser
 		settings = sublime.load_settings(FILENAME_SETTINGS)
-		url = sourcegraphURL(settings) + "/search" + '?' + urlencode({'q': query})
+		url = sourcegraphURL(settings) + 'search' + '?' + urlencode({'q': query, 'utm_source': 'Sublime-' + VERSION})
 		webbrowser.open(url, new=2)
