@@ -1,4 +1,4 @@
-# Sourcegraph for Sublime Text 3
+# Sourcegraph for Sublime Text 3 [![Package Control](https://img.shields.io/packagecontrol/dt/Sourcegraph.svg)]()
 
 ## Installation
 
