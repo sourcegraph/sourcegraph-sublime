@@ -1,10 +1,10 @@
 [
     {
-		"keys": ["alt+o"],
+		"keys": ["alt+a"],
 		"command": "sourcegraph_open"
 	},
     {
-		"keys": ["alt+k"],
+		"keys": ["alt+s"],
 		"command": "sourcegraph_search"
 	}
 ]
