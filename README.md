@@ -16,8 +16,8 @@ Keyboard Shortcuts:
 
 | Description                     | Mac        | Linux / Windows |
 |---------------------------------|------------|-----------------|
-| Open file in Sourcegraph        | `Option+O` | `Alt+O`         |
-| Search selection in Sourcegraph | `Option+K` | `Alt+K`         |
+| Open file in Sourcegraph        | `Option+A` | `Alt+A`         |
+| Search selection in Sourcegraph | `Option+S` | `Alt+S`         |
 
 
 ## Questions & Feedback
@@ -42,12 +42,18 @@ Logs show up in the Sublime console, which is accessible via ``` Ctrl+` ``` (ctr
 To develop the plugin:
 
 - `git clone` the repository into `~/Library/Application Support/Sublime Text 3/Packages/sourcegraph-sublime`
-- Open the console with ``` `Ctrl+` ``` (ctrl+backtick)
+- Open the console with ``` `Ctrl+` ``` (Ctrl+Backtick)
 - Make changes to the Python code and watch as Sublime reloads.
-- To release a new version: update `messages.json`, `README.md`, and `messages/welcome.txt` to **include all changes** and commit; then `git tag <THE VERSION>` and `git push --tags`.
+- To release a new version: update `messages.json`, `README.md`, and `messages/welcome.txt` to **include all changes** and `git commit -m "all: release v<THE VERSION>`; then `git tag v<THE VERSION>` and `git push --tags`.
 - Note: it sometimes takes a few hours for it to show up on https://packagecontrol.io/packages/Sourcegraph
 
+
 ## Version History
+
+- v1.0.2 - Usability improvements
+    - Adjusted the global search URL to the correct one, so that the search shortcut will work.
+    - Added support for non-default git branches (brings you to the checked out branch on Sourcegraph.com)
+    - Changed the keyboard shortcuts to `Option+S` (search selection) and `Option+A` (open selection) (`Alt` instead of `Option` for Windows and Linux).
 
 - v1.0.1 - minor bug fixes
     - Fixed a bug where `https` etc. GitHub repo remote URLs would incorrectly build the Sourcegraph.com URL.
