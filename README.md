@@ -1,4 +1,4 @@
-# Sourcegraph for Sublime Text 3 [![Package Control](https://img.shields.io/packagecontrol/dt/Sourcegraph.svg)]()
+# Sourcegraph for Sublime Text 3 [![Package Control](https://img.shields.io/packagecontrol/dt/Sourcegraph.svg)](https://packagecontrol.io/packages/Sourcegraph)
 
 The Sourcegraph plugin for Sublime Text 3 enables you to quickly open and search code on Sourcegraph.com easily and efficiently.
 
