@@ -22,6 +22,9 @@ Usage
 Version History
 ===============
 
+  v1.0.4 - Improved support for on-premises Sourcegraph instances
+    - Now using the `sourcegraph.com/-/editor` endpoint.
+
   v1.0.3 - Added usage metrics
     - Added minimal and non-obtrusive usage metrics, which lets us at Sourcegraph better improve our editor extensions.
 
