@@ -22,6 +22,19 @@ Keyboard Shortcuts:
 | Search selection in Sourcegraph | <kbd>Option+S</kbd> | <kbd>Alt+S</kbd> |
 
 
+## Settings
+
+Open the user package settings (`Sublime Text` -> `Package Settings` -> `Sourcegraph` -> `Settings - User`), then modify this example configuration:
+
+```
+{
+	// The Sourcegraph instance to use. Specify your on-premises Sourcegraph
+	// instance here, if applicable.
+	"SOURCEGRAPH_URL": "https://sourcegraph.com",
+}
+```
+
+
 ## Questions & Feedback
 
 Please file an issue: https://github.com/sourcegraph/sourcegraph-sublime/issues/new
