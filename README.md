@@ -70,6 +70,10 @@ To develop the plugin:
 
 ## Version History
 
+- v1.0.5 - Minor fixes to configuration.
+    - Fix opening README, LICENSE, etc through "Package Settings" menu.
+    - Update README to describe how to use with on-premises Sourcegraph instances.
+
 - v1.0.4 - Improved support for on-premises Sourcegraph instances
     - Now using the `sourcegraph.com/-/editor` endpoint.
 

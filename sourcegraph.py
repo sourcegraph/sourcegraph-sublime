@@ -13,7 +13,7 @@ if platform.system() == 'Windows':
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startupinfo.wShowWindow = subprocess.SW_HIDE
 
-VERSION = 'v1.0.4'
+VERSION = 'v1.0.5'
 FILENAME_SETTINGS = 'Sourcegraph.sublime-settings'
 
 # gitRemotes returns the names of all git remotes, e.g. ['origin', 'foobar']
