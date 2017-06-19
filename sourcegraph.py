@@ -13,7 +13,7 @@ if platform.system() == 'Windows':
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startupinfo.wShowWindow = subprocess.SW_HIDE
 
-VERSION = 'v1.0.5'
+VERSION = 'v1.0.6'
 FILENAME_SETTINGS = 'Sourcegraph.sublime-settings'
 
 # gitRemotes returns the names of all git remotes, e.g. ['origin', 'foobar']
@@ -57,11 +57,11 @@ def sourcegraphURL(settings):
 
 # repoInfo returns the Sourcegraph repository URI, and the file path relative
 # to the repository root. If the repository URI cannot be determined, an
-# exception is logged and (None, None) is returned.
+# exception is logged and ("", "", "") is returned.
 def repoInfo(fileName):
-	repo = None
-	fileRel = None
-	branch = None
+	repo = ""
+	fileRel = ""
+	branch = ""
 	try:
 		# Determine repository root directory.
 		fileDir = os.path.dirname(fileName)
@@ -78,7 +78,7 @@ def repoInfo(fileName):
 class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		remoteURL, branch, fileRel = repoInfo(self.view.file_name())
-		if remoteURL == None:
+		if remoteURL == "":
 			return
 
 		# For now, we assume the first selection is the most interesting one.
@@ -93,6 +93,7 @@ class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 			'file': fileRel,
 			'editor': 'Sublime',
 			'version': VERSION,
+
 			'start_row': row,
 			'start_col': col,
 			'end_row': row2,
@@ -102,6 +103,8 @@ class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 
 class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
+		remoteURL, branch, fileRel = repoInfo(self.view.file_name())
+
 		# For now, we assume the first selection is the most interesting one.
 		(row,col) = self.view.rowcol(self.view.sel()[0].begin())
 		(row2,col2) = self.view.rowcol(self.view.sel()[0].end())
@@ -111,5 +114,13 @@ class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 
 		# Search in browser
 		settings = sublime.load_settings(FILENAME_SETTINGS)
-		url = sourcegraphURL(settings) + '-/editor?' + urlencode({'search': query, 'editor': 'Sublime', 'version': VERSION})
+		url = sourcegraphURL(settings)+'-/editor?' + urlencode({
+			'remote_url': remoteURL,
+			'branch': branch,
+			'file': fileRel,
+			'editor': 'Sublime',
+			'version': VERSION,
+
+			'search': query,
+		})
 		webbrowser.open(url, new=2)

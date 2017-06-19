@@ -70,6 +70,9 @@ To develop the plugin:
 
 ## Version History
 
+- v1.0.6 - Fixed search shortcut.
+    - Updated the search URL to reflect a recent Sourcegraph.com change.
+
 - v1.0.5 - Minor fixes to configuration.
     - Fix opening README, LICENSE, etc through "Package Settings" menu.
     - Update README to describe how to use with on-premises Sourcegraph instances.
