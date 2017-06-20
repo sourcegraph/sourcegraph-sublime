@@ -2,6 +2,7 @@ import sublime, sublime_plugin
 import webbrowser
 import os, subprocess
 import platform
+import sys
 from urllib.parse import urlparse, urlencode
 
 # Define a startupinfo which can be passed to subprocess calls which hides the
@@ -13,7 +14,7 @@ if platform.system() == 'Windows':
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startupinfo.wShowWindow = subprocess.SW_HIDE
 
-VERSION = 'v1.0.6'
+VERSION = 'v1.0.7'
 FILENAME_SETTINGS = 'Sourcegraph.sublime-settings'
 
 # gitRemotes returns the names of all git remotes, e.g. ['origin', 'foobar']
@@ -99,7 +100,7 @@ class SourcegraphOpenCommand(sublime_plugin.TextCommand):
 			'end_row': row2,
 			'end_col': col2,
 		})
-		webbrowser.open(url, new=2)
+		webbrowserOpen(url)
 
 class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
@@ -123,4 +124,16 @@ class SourcegraphSearchCommand(sublime_plugin.TextCommand):
 
 			'search': query,
 		})
-		webbrowser.open(url, new=2)
+		webbrowserOpen(url)
+
+def webbrowserOpen(url):
+	if sys.platform == 'darwin':
+		# HACK: There exists a bug in a bad release of MacOS that breaks
+		# osascript, and subsequently the webbrowser module. The default
+		# browser does not open, and so it will open e.g. Firefox instead of
+		# the user's default Chrome.
+		#
+		# See https://bugs.python.org/issue30392
+		subprocess.check_call(["/usr/bin/open", url])
+		return
+	webbrowser.open(url, new=2)

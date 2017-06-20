@@ -22,6 +22,9 @@ Usage
 Version History
 ===============
 
+  v1.0.7 - Correctly open the default browser on Mac OS.
+    - Added a workaround for a Mac OS bug that causes Python to incorrectly open the second (non-default) browser. https://bugs.python.org/issue30392
+
   v1.0.6 - Fixed search shortcut.
     - Updated the search URL to reflect a recent Sourcegraph.com change.
 

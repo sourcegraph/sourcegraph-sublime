@@ -64,11 +64,14 @@ To develop the plugin:
   2. `README.md` (describe ALL changes)
   3. `messages/welcome.txt` (copy from README.md change above)
   4. `sourcegraph.py` (`VERSION` constant)
-  - Then `git commit -m "all: release v<THE VERSION>` and `git push` and `git tag v<THE VERSION>` and `git push --tags`.
+  - Then `git commit -m "all: release v<THE VERSION>"` and `git push` and `git tag v<THE VERSION>` and `git push --tags`.
   - Note: it sometimes takes a few hours for it to show up on https://packagecontrol.io/packages/Sourcegraph
 
 
 ## Version History
+
+- v1.0.7 - Correctly open the default browser on Mac OS.
+    - Added a workaround for a Mac OS bug that causes Python to incorrectly open the second (non-default) browser. https://bugs.python.org/issue30392
 
 - v1.0.6 - Fixed search shortcut.
     - Updated the search URL to reflect a recent Sourcegraph.com change.
